@@ -1,0 +1,49 @@
+{% extends 'judge/base.html' %}
+{% block problems_active %}active{% endblock %}
+
+{% block body %}
+<div class="problems-container container-fluid">
+
+    <!-- Albums -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>List of Problems</h3>
+        </div>
+        {% if problems %}
+            <div class="col-lg-8 col-md-8">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>STATUS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for problem in problems %}
+                        <tr>
+                            <td>{{ problem.pcode }}</td>
+                            <td><a href="{% url 'judge:detail' problem.pcode %}">{{ problem.pname }}</a> </td>
+                            <td>
+                                {% if problem.is_done %}
+                                    Submitted
+                                 {% else %}
+                                    Not Submitted
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                        </tbody>
+                        </table>
+                        </div>
+         {% else %}
+            <div class="col-sm-12">
+                No Problems yet.
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- If user searches and there are problems -->
+
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'judge/base.html' %}
+{% block title %}{{ problem.pname }}{% endblock %}
+{% block problems_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid problems-container">
+
+    <div class="row">
+
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{% url 'judge:detail' problem.pcode %}">
+                    </a>
+                    <h1>{{ problem.pcode }}</h1>
+                    <h2>{{ problem.author }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-8 col-md-9">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>{{ problem.pname }}</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <p>
+                        {{ problem.pdesc|safe }}
+                    </p>
+                    <form action="{% url 'judge:submission' problem.pcode %}" enctype="multipart/form-data" method="post">
+                        {% csrf_token %}
+                        <input type="file" name = "cppFile">
+                        <input type="submit" value="Upload" style="background: #047de8; color: white; height: 40px; width: 80px; border: 0px solid; position : fixed; top: 68%; left: 46%;">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

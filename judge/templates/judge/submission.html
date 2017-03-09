@@ -1,0 +1,11 @@
+{% extends 'judge/base.html' %}
+{% block title %}{{ problem.pname }}{% endblock %}
+{% block problems_active %}active{% endblock %}
+
+{% block body %}
+    {% if error %}
+    	{{ error }}
+    {% else %}
+    	{{ success }}
+    {% endif %}
+{% endblock %}
